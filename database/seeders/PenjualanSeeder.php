@@ -13,234 +13,86 @@ class PenjualanSeeder extends Seeder
         $data = [
             // Penjualan 1
             [
-                'detail_id' => 1,
                 'penjualan_id' => 1,
-                'barang_id' => 1, // Barang sesuai
-                'harga' => 500000,
-                'jumlah' => 1,
+                'user_id' => 1,
+                'pembeli' => 'Budi Santoso',
+                'penjualan_kode' => 'TRX001',
+                'penjualan_tanggal' => '2024-09-01 09:00:00',
             ],
-            [
-                'detail_id' => 2,
-                'penjualan_id' => 1,
-                'barang_id' => 2,
-                'harga' => 100000,
-                'jumlah' => 2,
-            ],
-            [
-                'detail_id' => 3,
-                'penjualan_id' => 1,
-                'barang_id' => 3,
-                'harga' => 200000,
-                'jumlah' => 1,
-            ],
-
             // Penjualan 2
             [
-                'detail_id' => 4,
                 'penjualan_id' => 2,
-                'barang_id' => 4,
-                'harga' => 300000,
-                'jumlah' => 1,
+                'user_id' => 2,
+                'pembeli' => 'Andi Wijaya',
+                'penjualan_kode' => 'TRX002',
+                'penjualan_tanggal' => '2024-09-01 10:00:00',
             ],
-            [
-                'detail_id' => 5,
-                'penjualan_id' => 2,
-                'barang_id' => 5,
-                'harga' => 150000,
-                'jumlah' => 1,
-            ],
-            [
-                'detail_id' => 6,
-                'penjualan_id' => 2,
-                'barang_id' => 6,
-                'harga' => 250000,
-                'jumlah' => 1,
-            ],
-
             // Penjualan 3
             [
-                'detail_id' => 7,
                 'penjualan_id' => 3,
-                'barang_id' => 7,
-                'harga' => 600000,
-                'jumlah' => 1,
+                'user_id' => 3,
+                'pembeli' => 'Siti Aminah',
+                'penjualan_kode' => 'TRX003',
+                'penjualan_tanggal' => '2024-09-01 11:00:00',
             ],
-            [
-                'detail_id' => 8,
-                'penjualan_id' => 3,
-                'barang_id' => 8,
-                'harga' => 700000,
-                'jumlah' => 2,
-            ],
-            [
-                'detail_id' => 9,
-                'penjualan_id' => 3,
-                'barang_id' => 9,
-                'harga' => 800000,
-                'jumlah' => 1,
-            ],
-
             // Penjualan 4
             [
-                'detail_id' => 10,
                 'penjualan_id' => 4,
-                'barang_id' => 10,
-                'harga' => 900000,
-                'jumlah' => 1,
+                'user_id' => 1,
+                'pembeli' => 'Dewi Lestari',
+                'penjualan_kode' => 'TRX004',
+                'penjualan_tanggal' => '2024-09-01 12:00:00',
             ],
-            [
-                'detail_id' => 11,
-                'penjualan_id' => 4,
-                'barang_id' => 11,
-                'harga' => 1000000,
-                'jumlah' => 1,
-            ],
-            [
-                'detail_id' => 12,
-                'penjualan_id' => 4,
-                'barang_id' => 12,
-                'harga' => 1100000,
-                'jumlah' => 1,
-            ],
-
             // Penjualan 5
             [
-                'detail_id' => 13,
                 'penjualan_id' => 5,
-                'barang_id' => 13,
-                'harga' => 1200000,
-                'jumlah' => 1,
+                'user_id' => 2,
+                'pembeli' => 'Rian Saputra',
+                'penjualan_kode' => 'TRX005',
+                'penjualan_tanggal' => '2024-09-01 13:00:00',
             ],
-            [
-                'detail_id' => 14,
-                'penjualan_id' => 5,
-                'barang_id' => 14,
-                'harga' => 1300000,
-                'jumlah' => 2,
-            ],
-            [
-                'detail_id' => 15,
-                'penjualan_id' => 5,
-                'barang_id' => 15,
-                'harga' => 1400000,
-                'jumlah' => 1,
-            ],
-
             // Penjualan 6
             [
-                'detail_id' => 16,
                 'penjualan_id' => 6,
-                'barang_id' => 1,
-                'harga' => 500000,
-                'jumlah' => 1,
+                'user_id' => 3,
+                'pembeli' => 'Ratna Dewi',
+                'penjualan_kode' => 'TRX006',
+                'penjualan_tanggal' => '2024-09-01 14:00:00',
             ],
-            [
-                'detail_id' => 17,
-                'penjualan_id' => 6,
-                'barang_id' => 2,
-                'harga' => 100000,
-                'jumlah' => 2,
-            ],
-            [
-                'detail_id' => 18,
-                'penjualan_id' => 6,
-                'barang_id' => 3,
-                'harga' => 200000,
-                'jumlah' => 1,
-            ],
-
             // Penjualan 7
             [
-                'detail_id' => 19,
                 'penjualan_id' => 7,
-                'barang_id' => 4,
-                'harga' => 300000,
-                'jumlah' => 1,
+                'user_id' => 1,
+                'pembeli' => 'Fajar Sidik',
+                'penjualan_kode' => 'TRX007',
+                'penjualan_tanggal' => '2024-09-01 15:00:00',
             ],
-            [
-                'detail_id' => 20,
-                'penjualan_id' => 7,
-                'barang_id' => 5,
-                'harga' => 150000,
-                'jumlah' => 1,
-            ],
-            [
-                'detail_id' => 21,
-                'penjualan_id' => 7,
-                'barang_id' => 6,
-                'harga' => 250000,
-                'jumlah' => 2,
-            ],
-
             // Penjualan 8
             [
-                'detail_id' => 22,
                 'penjualan_id' => 8,
-                'barang_id' => 7,
-                'harga' => 600000,
-                'jumlah' => 1,
+                'user_id' => 2,
+                'pembeli' => 'Zahra Putri',
+                'penjualan_kode' => 'TRX008',
+                'penjualan_tanggal' => '2024-09-01 16:00:00',
             ],
-            [
-                'detail_id' => 23,
-                'penjualan_id' => 8,
-                'barang_id' => 8,
-                'harga' => 700000,
-                'jumlah' => 2,
-            ],
-            [
-                'detail_id' => 24,
-                'penjualan_id' => 8,
-                'barang_id' => 9,
-                'harga' => 800000,
-                'jumlah' => 1,
-            ],
-
             // Penjualan 9
             [
-                'detail_id' => 25,
                 'penjualan_id' => 9,
-                'barang_id' => 10,
-                'harga' => 900000,
-                'jumlah' => 1,
+                'user_id' => 3,
+                'pembeli' => 'Agus Hermawan',
+                'penjualan_kode' => 'TRX009',
+                'penjualan_tanggal' => '2024-09-01 17:00:00',
             ],
-            [
-                'detail_id' => 26,
-                'penjualan_id' => 9,
-                'barang_id' => 11,
-                'harga' => 1000000,
-                'jumlah' => 1,
-            ],
-            [
-                'detail_id' => 27,
-                'penjualan_id' => 9,
-                'barang_id' => 12,
-                'harga' => 1100000,
-                'jumlah' => 1,
-            ],
-
             // Penjualan 10
             [
-                'detail_id' => 28,
                 'penjualan_id' => 10,
-                'barang_id' => 13,
-                'harga' => 1200000,
-                'jumlah' => 1,
-            ],
-            [
-                'detail_id' => 29,
-                'penjualan_id' => 10,
-                'barang_id' => 14,
-                'harga' => 1300000,
-                'jumlah' => 2,
-            ],
-            [
-                'detail_id' => 30,
-                'penjualan_id' => 10,
-                'barang_id' => 15,
-                'harga' => 1400000,
-                'jumlah' => 1,
+                'user_id' => 1,
+                'pembeli' => 'Winda Sari',
+                'penjualan_kode' => 'TRX010',
+                'penjualan_tanggal' => '2024-09-01 18:00:00',
             ],
         ];
-        DB::table('t_penjualans') -> insert($data);
+
+        DB::table('t_penjualans')->insert($data);
     }
 }
