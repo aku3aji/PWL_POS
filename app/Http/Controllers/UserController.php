@@ -50,7 +50,12 @@ class UserController extends Controller
 
         //Praktikum 2.2
         // $user = UserModel::findOrFail(1);
-        $user = UserModel::where('username', 'manager9')->firstOrFail();
-        return view('user',['data' => $user]);
+        // $user = UserModel::where('username', 'manager9')->firstOrFail();
+        // return view('user',['data' => $user]);
+
+        //Praktikum 2.3
+        // $user = UserModel::where('level_id', '2')->count();dd($user);
+        $user = UserModel::where('level_id', 2)->count();
+        return view('user', ['jumlah_pengguna' => $user]);
     }
 }
