@@ -10,33 +10,30 @@ class UserController extends Controller
 {
     public function index()
     {
+        //Jobsheet 4
+
+        //Praktikum 1
+        // $data = [
+        //     'level_id' => 2,
+        //     'username' => 'manager_dua',
+        //     'nama' => 'Manager 2',
+        //     'password' => Hash::make('12345')
+        // ];
+        // UserModel::create($data);
+
+        // $user = UserModel::all();
+        // return view('user', ['data' => $user]);
+
+        //Modifikasi Praktikum 1
         $data = [
             'level_id' => 2,
             'username' => 'manager_tiga',
             'nama' => 'Manager 3',
             'password' => Hash::make('12345')
         ];
-
         UserModel::create($data);
 
-        $user = UserModel::all(); // Ambil semua data dari tabel m_user
+        $user = UserModel::all();
         return view('user', ['data' => $user]);
-
-        // Tambah data user dengan Eloquent Model
-        // $data = [
-        //     'username' => 'Customer-1',
-        //     'nama' => 'Pelanggan',
-        //     'password' => Hash::make('12345'),
-        //     'level_id' => 4
-        // ];
-
-        // UserModel::insert($data); // Tambahkan data ke tabel m_user*/
-
-        // $data = [
-        //     'nama' => 'Pelanggan Pertama',
-        // ];
-        // UserModel::where('username', 'Customer-1')->update($data);
-
-        // Coba akses model UserModel
     }
 }
