@@ -24,11 +24,11 @@
                 <div class="col-11">
                     <select class="form-control" id="kategori_id" name="kategori_id" required>
                         <option value="">Pilih Kategori</option>
-                        <option value="1" {{ old('kategori_id') == 1 ? 'selected' : '' }}>Elektronik</option>
-                        <option value="2" {{ old('kategori_id') == 2 ? 'selected' : '' }}>Pakaian</option>
-                        <option value="3" {{ old('kategori_id') == 3 ? 'selected' : '' }}>Makanan</option>
-                        <option value="4" {{ old('kategori_id') == 4 ? 'selected' : '' }}>Parabotan</option>
-                        <option value="5" {{ old('kategori_id') == 5 ? 'selected' : '' }}>Alat Tulis</option>
+                        <option value="1" {{ old('kategori_id') == 1 ? 'selected' : '' }}>Mesin</option>
+                        <option value="2" {{ old('kategori_id') == 2 ? 'selected' : '' }}>Aksesoris</option>
+                        <option value="3" {{ old('kategori_id') == 3 ? 'selected' : '' }}>Kelistrikan</option>
+                        <option value="4" {{ old('kategori_id') == 4 ? 'selected' : '' }}>Ban dan Velg</option>
+                        <option value="5" {{ old('kategori_id') == 5 ? 'selected' : '' }}>Sistem Suspensi</option>
                     </select>
                     @error('kategori_id')
                         <small class="form-text text-danger">{{ $message }}</small>
