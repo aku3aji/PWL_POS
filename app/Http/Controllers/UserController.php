@@ -218,7 +218,7 @@ class UserController extends Controller
 
         return view('user.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'level' => $level, 'activeMenu' => $activeMenu]);
     }
-    // Ambil data user dalam bentuk json untuk datatables 
+        // Ambil data user dalam bentuk json untuk datatables 
     public function list(Request $request) 
     { 
         $users = UserModel::select('user_id', 'username', 'nama', 'level_id')->with('level');
@@ -236,6 +236,7 @@ class UserController extends Controller
             // $btn .= '<form class="d-inline-block" method="POST" action="'.url('/user/'.$user->user_id).'">'
             //     . csrf_field() . method_field('DELETE') .
             //     '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda yakin menghapus data ini?\');">Hapus</button></form>';
+
             $btn = '<button onclick="modalAction(\''.url('/user/' . $user->user_id .'/show_ajax').'\')" class="btn btn-info btn-sm">Detail</button> ';
             $btn .= '<button onclick="modalAction(\''.url('/user/' . $user->user_id .'/edit_ajax').'\')" class="btn btn-warning btn-sm">Edit</button> ';
             $btn .= '<button onclick="modalAction(\''.url('/user/' . $user->user_id .'/delete_ajax').'\')" class="btn btn-danger btn-sm">Hapus</button> ';
@@ -455,6 +456,35 @@ class UserController extends Controller
                 return response()->json([
                     'status' => false,
                     'message' => 'Data tidak ditemukan'
+                ]);
+            }
+        }
+        return redirect('/');
+    }
+
+    //Menampilkan laman form konfirmasi hapus data user AJAX
+    public function confirm_ajax(string $id){
+        $user = UserModel::find($id);
+
+        return view('user.confirm_ajax', ['user' => $user]);
+    }
+
+    //Menghapus data user AJAX
+    public function delete_ajax(Request $request, $id)
+    {
+        //periksa bila request dari AJAX atau bukan
+        if ($request->ajax() || $request->wantsJson()){
+            $user = UserModel::find($id);
+            if ($user) {
+                $user->delete();
+                return response()->json([
+                    'status'    => true,
+                    'message'   => 'Data berhasil dihapus'
+                ]);
+            } else {
+                return response()->json([
+                    'status'    => false,
+                    'message'   => 'Data tidak ditemukan'
                 ]);
             }
         }
