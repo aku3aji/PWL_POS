@@ -490,4 +490,29 @@ class UserController extends Controller
         }
         return redirect('/');
     }
+    public function create_register()
+    {
+        $levels = LevelModel::all(); // Retrieve levels for the dropdown
+        return view('user.create_register', ['levels' => $levels]);
+    }
+    public function store_register(Request $request)
+    {
+        $request->validate([
+            'username' => 'required|string|min:3|unique:m_user,username',
+            'nama' => 'required|string|max:100',
+            'password' => 'required|min:5',
+            'level_id' => 'required|integer',
+        ]);
+        UserModel::create([
+            'username' => $request->username,
+            'nama' => $request->nama,
+            'password' => bcrypt($request->password),
+            'level_id' => $request->level_id,
+        ]);
+        return response()->json([
+            'status' => true,
+            'message' => 'User registered successfully',
+            'redirect' => url('/user')
+        ]);
+    }
 }

@@ -57,6 +57,13 @@
             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
           </div>
         </div>
+        <br>
+        <div class="card-footer text-center">
+            <p class="mb-1">
+                <a href="{{ url('/register') }}">Belum memiliki akun? Daftar disini</a>
+            </p>
+        </div>
+        </br>
       </form>
     </div>
   </div>
