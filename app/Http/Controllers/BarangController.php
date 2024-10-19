@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LevelModel;
 use App\Models\BarangModel;
 use App\Models\KategoriModel;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -215,5 +216,87 @@ class BarangController extends Controller
             }
         }
         return redirect('/');
+    }
+
+    public function export_excel()
+    {
+        // ambil data barang yang akan di export
+        $barang = BarangModel::select('kategori_id', 'barang_kode', 'barang_nama', 'harga_beli', 'harga_jual')
+            ->orderBy('kategori_id')
+            ->with('kategori')
+            ->get();
+
+            // Load library PhpSpreadsheet
+            $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet(); // Ambil sheet yang aktif
+
+            // Set header kolom
+            $sheet->setCellValue('A1', 'No');
+            $sheet->setCellValue('B1', 'Kode Barang');
+            $sheet->setCellValue('C1', 'Nama Barang');
+            $sheet->setCellValue('D1', 'Harga Beli');
+            $sheet->setCellValue('E1', 'Harga Jual');
+            $sheet->setCellValue('F1', 'Kategori');
+            $sheet->getStyle('A1:F1')->getFont()->setBold(true); // Bold header
+
+            $no = 1; // Nomor data dimulai dari 1
+            $baris = 2; // Baris data dimulai dari baris ke 2
+
+            // Loop data barang dan masukkan ke dalam sheet
+            foreach ($barang as $key => $value) {
+                $sheet->setCellValue('A' . $baris, $no);
+                $sheet->setCellValue('B' . $baris, $value->barang_kode);
+                $sheet->setCellValue('C' . $baris, $value->barang_nama);
+                $sheet->setCellValue('D' . $baris, $value->harga_beli);
+                $sheet->setCellValue('E' . $baris, $value->harga_jual);
+                $sheet->setCellValue('F' . $baris, $value->kategori->kategori_nama); // Ambil nama kategori
+                $baris++;
+                $no++;
+            }
+
+            // Set auto size untuk kolom A sampai F
+            foreach (range('A', 'F') as $columnID) {
+                $sheet->getColumnDimension($columnID)->setAutoSize(true);
+            }
+
+            // Set judul sheet
+            $sheet->setTitle('Data Barang');
+
+            // Membuat writer untuk menulis file Excel
+            $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+            $filename = 'Data_Barang_' . date('Y-m-d_H-i-s') . '.xlsx';
+
+            // Set header untuk download file Excel
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="' . $filename . '"');
+            header('Cache-Control: max-age=0');
+            header('Cache-Control: max-age=1'); // Bypass cache IE
+            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Expired date in the past
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // Always modified
+            header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+            header('Pragma: public'); // HTTP/1.0
+
+            // Simpan file ke output
+            $writer->save('php://output');
+            exit;
+    }
+
+    public function export_pdf()
+    {
+        // Ambil data barang yang akan diekspor
+        $barang = BarangModel::select('kategori_id', 'barang_kode', 'barang_nama', 'harga_beli', 'harga_jual')
+            ->orderBy('kategori_id')
+            ->orderBy('barang_kode')
+            ->with('kategori')
+            ->get();
+
+        // Menggunakan Barryvdh\DomPDF\Facade\Pdf untuk membuat PDF
+        $pdf = Pdf::loadView('barang.export_pdf', ['barang' => $barang]);
+
+        $pdf->setPaper('a4', 'portrait');// Set ukuran kertas dan orientasi
+        $pdf->setOption("isRemoteEnabled", true);// Set opsi jika ada gambar dari URL, set true
+        $pdf->render();// Render PDF
+        
+        return $pdf->stream('Data_Barang_' . date('Y-m-d H:i:s') . '.pdf');
     }
 }
