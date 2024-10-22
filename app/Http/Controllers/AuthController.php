@@ -25,6 +25,10 @@ class AuthController extends Controller
             $credentials = $request->only('username', 'password');
 
             if (Auth::attempt($credentials)) {
+                session([
+                    'profile_img_path' => Auth::user()->foto,
+                    'user_id' => Auth::user()->user_id
+                ]);
                 return response()->json([
                     'status' => true,
                     'message' => 'Login Berhasil',
@@ -47,7 +51,7 @@ class AuthController extends Controller
         return view('auth.register')
             ->with('level', $level);
     }
-    public function postRegister(Request $request)
+    public function store(Request $request)
     {
         // cek apakah request berupa ajax
         if ($request->ajax() || $request->wantsJson()) {
