@@ -1,5 +1,4 @@
 @extends('layouts.template')
-
 @section('content')
     <div class="card card-outline card-primary">
         <div class="card-header">
@@ -13,7 +12,7 @@
                     <label class="col-1 control-label col-form-label">Supplier</label>
                     <div class="col-11">
                         <select class="form-control" id="supplier_id" name="supplier_id" required>
-                            <option value="">- Pilih Supplier -</option>
+                            <option value="">- Pilih supplier -</option>
                             @foreach ($supplier as $item)
                                 <option value="{{ $item->supplier_id }}">{{ $item->supplier_nama }}</option>
                             @endforeach
@@ -27,7 +26,7 @@
                     <label class="col-1 control-label col-form-label">Barang</label>
                     <div class="col-11">
                         <select class="form-control" id="barang_id" name="barang_id" required>
-                            <option value="">- Pilih Barang -</option>
+                            <option value="">- Pilih barang -</option>
                             @foreach ($barang as $item)
                                 <option value="{{ $item->barang_id }}">{{ $item->barang_nama }}</option>
                             @endforeach
@@ -41,7 +40,7 @@
                     <label class="col-1 control-label col-form-label">User</label>
                     <div class="col-11">
                         <select class="form-control" id="user_id" name="user_id" required>
-                            <option value="">- Pilih User -</option>
+                            <option value="">- Pilih user -</option>
                             @foreach ($user as $item)
                                 <option value="{{ $item->user_id }}">{{ $item->nama }}</option>
                             @endforeach
@@ -52,9 +51,10 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-1 control-label col-form-label">Stok tanggal</label>
+                    <label class="col-1 control-label col-form-label">Stok Tanggal</label>
                     <div class="col-11">
-                        <input type="date" class="form-control" id="stok_tanggal" name="stok_tanggal" value="{{ old('stok_tanggal')->format('Y-m-d') }}" required>
+                        <input type="date" class="form-control" id="stok_tanggal" name="stok_tanggal" value="{{ old('stok_tanggal') }}"
+                            required>
                         @error('stok_tanggal')
                             <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
@@ -63,7 +63,7 @@
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Stok Jumlah</label>
                     <div class="col-11">
-                        <input type="number" class="form-control" id="stok_jumlah" name="stok_jumlah" value="{{ old('stok_jumlah') }}" required>
+                        <input type="text" class="form-control" id="stok_jumlah" name="stok_jumlah" required>
                         @error('stok_jumlah')
                             <small class="form-text text-danger">{{ $message }}</small>
                         @enderror

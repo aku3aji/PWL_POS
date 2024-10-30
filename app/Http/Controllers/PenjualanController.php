@@ -38,25 +38,36 @@ class PenjualanController extends Controller
     }
 
     public function list(Request $request)
-    {
-        $penjualan = PenjualanModel::select('penjualan_id', 'user_id', 'pembeli', 'penjualan_kode', 'penjualan_tanggal')
-            ->with('user');
-
-        if ($request->user_id) {
-            $penjualan->where('user_id', $request->user_id);
-        }
-
-        return DataTables::of($penjualan)
-            ->addIndexColumn() // menambahkan kolom index / no urut (default nama kolom: DT_RowIndex) 
-            ->addColumn('aksi', function ($penjualan) { // menambahkan kolom aksi 
-                $btn = '<a href="' . url('/penjualan/' . $penjualan->penjualan_id) . '" class="btn btn-info btn-sm">Detail</a> ';
-                $btn .= '<button onclick="modalAction(\'' . url('/penjualan/' . $penjualan->penjualan_id . '/edit_ajax') . '\')" class="btn btn-warning btn-sm">Edit</button> ';
-                $btn .= '<button onclick="modalAction(\'' . url('/penjualan/' . $penjualan->penjualan_id . '/delete_ajax') . '\')" class="btn btn-danger btn-sm">Hapus</button> ';
-                return $btn;
-            })
-            ->rawColumns(['aksi']) // memberitahu bahwa kolom aksi adalah html 
-            ->make(true);
+{
+    // Tambahkan prefix 't_penjualans' pada kolom 'user_id' untuk menghindari ambigu
+    $penjualan = PenjualanModel::select(
+        't_penjualans.penjualan_id', 
+        't_penjualans.penjualan_kode', 
+        't_penjualans.user_id', 
+        't_penjualans.pembeli', 
+        't_penjualans.penjualan_tanggal'
+    )
+    ->with('user');
+    
+    // filter data penjualan
+    if ($request->user_id) {
+        $penjualan->where('t_penjualans.user_id', $request->user_id);
     }
+    
+    return DataTables::of($penjualan)
+        // menambahkan kolom index / no urut (default nama kolom: DT_RowIndex)
+        ->addIndexColumn()
+        ->addColumn('aksi', function ($penjualan) { // menambahkan kolom aksi
+            $btn = '<button onclick="modalAction(\''.url('/penjualan/' . $penjualan->penjualan_id .'/show_ajax').'\')" class="btn btn-info btn-sm">Detail</button> ';
+            $btn .= '<button onclick="modalAction(\''.url('/penjualan/' . $penjualan->penjualan_id .'/edit_ajax').'\')" class="btn btn-warning btn-sm">Edit</button> ';
+            $btn .= '<button onclick="modalAction(\''.url('/penjualan/' . $penjualan->penjualan_id .'/delete_ajax').'\')" class="btn btn-danger btn-sm">Hapus</button> ';
+
+            return $btn;
+        })
+        ->rawColumns(['aksi']) // memberitahu bahwa kolom aksi adalah html
+        ->make(true);
+}
+
     public function show(string $id)
     {
         $penjualan = PenjualanModel::with('user')->find($id);

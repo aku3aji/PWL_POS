@@ -36,10 +36,9 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout')->middlew
 Route::get('register', [AuthController::class, 'register']);
 Route::post('register', [AuthController::class, 'postRegister']);
 
-Route::match(['get', 'head'], '/', [WelcomeController::class, 'index'])->name('home')->middleware('auth');
 
 Route::middleware(['auth'])->group(function () {
-    // artinya semua route di dalam group ini harus login dulu
+    Route::get('/', [WelcomeController::class, 'index']);
        
     Route::middleware(['authorize:ADM'])->group(function(){
         Route::group(['prefix' => 'level'], function() {
@@ -67,6 +66,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/', [WelcomeController::class, 'index']);
         
     Route::middleware(['authorize:ADM,MNG'])->group(function(){
         Route::group(['prefix' => 'supplier'], function () {
@@ -116,7 +116,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    // artinya semua route di dalam group ini harus login dulu
+    Route::get('/', [WelcomeController::class, 'index']);
         
     Route::middleware(['authorize:ADM,MNG,STF'])->group(function(){
         Route::group(['prefix' => 'barang'], function () {
@@ -229,5 +229,12 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/export_excel', [DetailController::class, 'export_excel']); // export excel
             Route::get('/export_pdf', [DetailController::class, 'export_pdf']); // export pdf
         });
+    });
+
+    Route::middleware(['authorize:ADM,MNG,STF,CUS'])->group(function(){
+        Route::get('/profile', [ProfileController::class, 'index']);
+        Route::get('/profile/{id}/edit_ajax', [ProfileController::class, 'edit_ajax']);
+        Route::put('/profile/{id}/update_ajax', [ProfileController::class, 'update_ajax']);
+        Route::put('/profile/{id}/update_foto', [ProfileController::class, 'update_foto']);
     });
 });
