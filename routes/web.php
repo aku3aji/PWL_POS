@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\DetailController;
@@ -28,10 +29,10 @@ use Illuminate\Auth\Events\Logout;
 
 Route::pattern('id', '[0-9]+'); // artinya ketika ada parameter (id), maka harus berupa angka
 
-Route::get('login', [AuthController::class, 'login'])->name('login');
-Route::post('login', [AuthController::class, 'postlogin']);
-Route::get('logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
-
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'postlogin']);
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+Route::post('/logout', LogoutController::class)->name('logout');
 
 Route::get('register', [AuthController::class, 'register']);
 Route::post('register', [AuthController::class, 'postRegister']);
