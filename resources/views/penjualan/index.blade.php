@@ -36,7 +36,7 @@
       </div>
       <table class="table table-bordered table-striped table-hover table-sm" id="table_penjualan"> 
         <thead> 
-          <tr><th>ID</th><th>Kode Transaksi Penjualan</th><th>Nama Pembeli</th><th>Tanggal Transaksi Penjualan</th><th>User Pembeli</th><th>Aksi</th></tr> 
+          <tr><th>ID</th><th>Kode Transaksi Penjualan</th><th>Nama Pembeli</th><th>Tanggal Transaksi Penjualan</th><th>User Pembeli</th><th>Foto Transaksi</th><th>Aksi</th></tr> 
         </thead> 
       </table> 
     </div> 
@@ -78,13 +78,11 @@
               // nomor urut dari laravel datatable addIndexColumn() 
               data: "DT_RowIndex",             
               className: "text-center",
-              width: "5%",
               orderable: false, 
               searchable: false     
             },{ 
               data: "penjualan_kode",                
               className: "",
-              width: "10%",
               // orderable: true, jika ingin kolom ini bisa diurutkan  
               orderable: true,     
               // searchable: true, jika ingin kolom ini bisa dicari 
@@ -92,26 +90,29 @@
             },{ 
               data: "pembeli",                
               className: "",
-              width: "15%",
               orderable: true,     
               searchable: true     
             },{ 
               data: "penjualan_tanggal",                
               className: "",
-              width: "10%",
               orderable: true,     
               searchable: false,   
             },{ 
               // mengambil data user hasil dari ORM berelasi 
               data: "user.nama",                
               className: "",
-              width: "10%",
               orderable: true,     
               searchable: false     
+            },{
+              data: "image", // Menambahkan kolom foto
+              orderable: false,
+              searchable: false,
+              render: function(data) {
+                return data; // Mengembalikan HTML foto
+              }
             },{ 
               data: "aksi",                
               className: "text-center",
-              width: "14%",
               orderable: false,     
               searchable: false
             } 

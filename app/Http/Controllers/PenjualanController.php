@@ -45,7 +45,8 @@ class PenjualanController extends Controller
         't_penjualans.penjualan_kode', 
         't_penjualans.user_id', 
         't_penjualans.pembeli', 
-        't_penjualans.penjualan_tanggal'
+        't_penjualans.penjualan_tanggal',
+        'image'
     )
     ->with('user');
     

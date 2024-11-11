@@ -45,6 +45,7 @@
                     <th>Harga Beli</th>
                     <th>Harga Jual</th>
                     <th>Kategori</th>
+                    <th>Foto Barang</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -80,25 +81,22 @@
                 columns: [{
                     data: "kategori_id",
                     className: "text-center",
-                    width: "5%",
                     orderable: false,
                     searchable: false
                 }, {
                     data: "barang_kode",
                     className: "",
-                    width: "10%",
                     orderable: true,
                     searchable: true
                 }, {
                     data: "barang_nama",
                     className: "",
-                    width: "37%",
+                    
                     orderable: true,
                     searchable: true,
                 }, {
                     data: "harga_beli",
                     className: "",
-                    width: "10%",
                     orderable: true,
                     searchable: false,
                     render: function (data, type, row) {
@@ -107,7 +105,6 @@
                 }, {
                     data: "harga_jual",
                     className: "",
-                    width: "10%",
                     orderable: true,
                     searchable: false,
                     render: function (data, type, row) {
@@ -116,13 +113,18 @@
                 }, {
                     data: "kategori.kategori_nama",
                     className: "",
-                    width: "14%",
                     orderable: true,
                     searchable: false
                 }, {
+                    data: "image", // Menambahkan kolom foto
+                    orderable: false,
+                    searchable: false,
+                    render: function(data) {
+                        return data; // Mengembalikan HTML foto
+                    }
+                }, {
                     data: "aksi",
                     className: "text-center",
-                    width: "14%",
                     orderable: false,
                     searchable: false
                 }]
